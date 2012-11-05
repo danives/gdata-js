@@ -1,23 +1,15 @@
-# gdata-js
+GDrive
 
-Simple Google Data API client for OAuth 2.0 with express + connect.
+A simple proof of concept app to connect to your gdrive and retrieve a list of files and folders.
 
-    npm install gdata-js
+First ensure you have registered for API access.
+https://code.google.com/apis/console
+Once you have registered for access, you will have a client id and client secret.
+
+npm install gdrive
 
 ## Usage
 
-gdata-js has two methods:
+To run the app, execute node test.js <client id> <client secret>
 
-* getAccessToken(_req_, _res_, _callback_): Goes through the OAuth 2.0 flow to get an access token
-* getFeed(_http_method_, _path_, _params_, _callback_): Does a call to the Google Data API to get a feed object.
-
-oauth\_token must be contained in the _params_ argument as demonstrated in test.js
-
-## Test
-
-Enter your consumer key and secret in test.js
-
-    cd test
-    node test.js
-
-open http://localhost:8553
+open browser and point it to http://localhost:8553
