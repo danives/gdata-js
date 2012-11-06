@@ -5,7 +5,7 @@
     "author": "Roshan Paiva <roshanpaiva@gmail.com>",
     "keywords": ["google", "gdata"],
     "main" : "gdata.js",
-    "dependencies": {},
+    "dependencies": {"express":">= 3.0","connect":">=2.6.2","connect-assets": ">= 2.2.1"},
     "repository" : {"type": "git" , "url": "http://github.com/smurthas/gdata-js.git" },
     "engines": { "node": ">=0.6.0 <0.7.0" }
 }
