@@ -2,7 +2,6 @@ var EventEmitter, doPost, oauthBase, querystring, request;
 
 doPost = function(body, callback) {
   var options;
-  console.log("were in doPOst");
   options = {
     method: "POST",
     uri: "https://accounts.google.com/o/oauth2/token",
@@ -15,12 +14,11 @@ doPost = function(body, callback) {
   return request(options, function(error, response, body) {
     console.log(response.statusCode);
     if (!error && response.statusCode === 200) {
-      console.log("data" + JSON.stringify(body));
       return callback(null, JSON.parse(body));
     } else if (error) {
       return callback(error, null);
     } else {
-      console.error("refreshing token -- statusCode !== 200, yoikes! data:", body.toString());
+      console.error("Unknown error - Data:", body.toString());
       return callback(body.toString);
     }
   });
@@ -38,7 +36,6 @@ module.exports = function(client_id, client_secret, redirect_uri) {
   var client, clientID, clientSecret, doRequest, redirectURI, refreshToken, token;
   doRequest = function(url, params, callback) {
     var options;
-    console.log(url);
     options = {
       method: "GET",
       uri: url,
@@ -46,17 +43,13 @@ module.exports = function(client_id, client_secret, redirect_uri) {
         Authorization: "Bearer " + params.oauth_token
       }
     };
-    console.log(JSON.stringify(options));
     return request(options, function(error, response, body) {
       var docList;
-      console.log(response.statusCode);
       if (response.statusCode === 200) {
-        console.log("were here!");
         docList = JSON.parse(body);
         return callback(null, JSON.parse(body));
       } else {
         console.log("error: " + response.statusCode);
-        console.log(body);
         return callback(error, null);
       }
     });
@@ -100,7 +93,6 @@ module.exports = function(client_id, client_secret, redirect_uri) {
         return res.end(resp + "<a target=_new href='" + oauthBase + "/auth?" + querystring.stringify(options) + "'>Authenticate</a>");
       }
     } else {
-      console.log("calling doPost from get access token");
       return doPost({
         grant_type: "authorization_code",
         code: req.query.code,
@@ -116,7 +108,6 @@ module.exports = function(client_id, client_secret, redirect_uri) {
     }
   };
   client.setToken = function(tkn) {
-    console.log("setting the token");
     return token = tkn;
   };
   client.getFeed = function(url, params, callback) {
@@ -126,8 +117,6 @@ module.exports = function(client_id, client_secret, redirect_uri) {
     }
     params.oauth_token = token.access_token;
     return doRequest(url, params, function(err, body) {
-      console.log("inside" + err);
-      console.log("inside" + body);
       return callback(err, body);
     });
   };
