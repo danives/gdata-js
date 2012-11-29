@@ -1,8 +1,8 @@
 {
     "name": "gdata-js",
     "description": "Simple OAuth 2.0 GData API client",
-    "version": "2.0.1",
-    "author": "Roshan Paiva <roshanpaiva@gmail.com>",
+    "version": "2.0.2",
+    "author": "Dan Ives <dan@thedanives.com>",
     "keywords": ["google", "gdata"],
     "main" : "gdata.js",
     "dependencies": {"express":">= 3.0","connect":">=2.6.2","connect-assets": ">= 2.2.1"},
